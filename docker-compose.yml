@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  web:
+    build: ./front-end
+    command: npm run start
+    restart: always
+    ports:
+     - 3000:3000
+    volumes:
+     - ./front-end/:/web
+    depends_on:
+      - api
+  api:
+    build: ./back-end
+    command: npm run dev
+    restart: always
+    ports:
+     - 3001:3001
+    volumes:
+     - ./back-end/:/api
+    depends_on:
+      - database
+  database:
+    image: mysql:8.0.29
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=senhaDoDB
+      - MYSQL_DATABASE=delivery-app
+    ports:
+      - 3306:3306
