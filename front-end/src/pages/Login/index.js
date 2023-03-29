@@ -6,19 +6,23 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [inputError, setInputError] = useState();
+  const [isLogged, setIsLogged] = useState(false);
 
   const handleSubmit = async () => {
     api.post('/login', { email, password })
-      .then()
+      .then(() => {
+        setIsLogged(true);
+      })
       .catch((err) => {
         if (err.response.status === +'404') return setInputError('Email não existe');
       });
   };
 
+  if (isLogged) return <Redirect to="/customer/products" />;
+
   return (
     <>
       <Redirect to="/login" />
-
       <div>
         <img src="" alt="" />
         <h1>nome app</h1>
