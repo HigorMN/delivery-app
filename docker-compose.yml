@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+  web:
+    build: ./front-end
+    command: npm run start
+    container_name: 'web'
+    restart: always
+    ports:
+     - 3000:3000
+    volumes:
+     - ./front-end/:/web
+    depends_on:
+      - api
+  api:
+    build: ./back-end
+    command: npm run dev
+    container_name: 'api'
+    restart: always
+    ports:
+     - 3001:3001
+    volumes:
+     - ./back-end/:/api
+    environment:
+     - HOSTNAME=database
+     - NODE_ENV=development
+     - MYSQL_USER=root
+     - MYSQL_PASSWORD=senhaDoDB
+     - MYSQL_PORT=3306
+     - MYSQL_HOST=localhost
+     - API_PORT=3001
+     - MYSQL_DB_NAME=delivery-app
+    depends_on:
+      - database
+  database:
+    image: mysql:8.0.29
+    restart: always
+    container_name: 'database'
+    environment:
+      - MYSQL_ROOT_PASSWORD=senhaDoDB
+      - MYSQL_DATABASE=delivery-app
+    ports:
+      - 3306:3306
