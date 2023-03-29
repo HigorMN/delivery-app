@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
 
-  SaleProductTable.associate = ({ Sale, Product}) => {
-    SaleProductTable.belongsToMany(Sale, { foreignKey: 'saleId', as: 'sale'})
-    SaleProductTable.belongsToMany(Product, { foreignKey: 'productId', as: 'product'})
-  }
+  // SaleProductTable.associate = ({ Sale, Product}) => {
+  //   SaleProductTable.belongsToMany(Sale, { foreignKey: 'saleId', as: 'sale'})
+  //   SaleProductTable.belongsToMany(Product, { foreignKey: 'productId', as: 'product'})
+  // }
 
   return SaleProductTable;
 }
