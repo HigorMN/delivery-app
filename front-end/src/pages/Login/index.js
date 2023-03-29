@@ -1,7 +1,11 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 export default function Login() {
   return (
-    <div>Login</div>
+    <>
+      <Redirect to="/login" />
+      <div>Login</div>
+    </>
   );
 }
