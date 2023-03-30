@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const md5 = require('md5');
 const generateJwt = require('../utils/generateJwt');
 const { User } = require('../database/models');
