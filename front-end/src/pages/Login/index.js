@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import api from '../../utils/api';
-import { useHistory } from 'react-router-dom'; 
 
 export default function Login() {
   const [email, setEmail] = useState('');
