@@ -35,7 +35,7 @@ function Register() {
       setIsUserInvalid(true);
       return;
     }
- 
+
     if (user.role === 'customer') {
       push('/customer/products');
     }
