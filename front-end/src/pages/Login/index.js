@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+
+import React, { useState, useEffect, useHistory } from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
 import api from '../../utils/api';
 
 export default function Login() {
@@ -7,6 +8,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [inputError, setInputError] = useState();
   const [isLogged, setIsLogged] = useState(false);
+  const { push } = useHistory();
 
   useEffect(() => {
     const localUser = JSON.parse(localStorage.getItem('user'));
@@ -62,6 +64,7 @@ export default function Login() {
             LOGIN
           </button>
           <button
+            onClick={ () => push('/register') }
             type="button"
             data-testid="common_login__button-register"
           >
