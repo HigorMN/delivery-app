@@ -13,7 +13,7 @@ function Register() {
     const minValue = 6;
     const maxValue = 12;
     const regex = /\S+[@]\w+[.]\w+/gi;
-    if (regex.test(email) && password.length >= minValue && name.length >= maxValue) {
+    if (regex.test(email) && password.length >= minValue && name.length < maxValue) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
@@ -21,7 +21,7 @@ function Register() {
   }, [email, password, name]);
 
   const handleClick = async () => {
-    const response = await fetch('http://localhost:3000/register', {
+    const response = await fetch('http://localhost:3001/register', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -35,7 +35,7 @@ function Register() {
       setIsUserInvalid(true);
       return;
     }
-    console.log(user);
+ 
     if (user.role === 'customer') {
       push('/customer/products');
     }

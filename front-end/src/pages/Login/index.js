@@ -59,6 +59,7 @@ export default function Login() {
 
           </button>
           <button
+            onClick={ () => push('/register') }
             type="button"
             data-testid="common_login__button-register"
           >
