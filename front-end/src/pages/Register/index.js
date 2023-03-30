@@ -13,7 +13,8 @@ function Register() {
     const minValue = 6;
     const maxValue = 12;
     const regex = /\S+[@]\w+[.]\w+/gi;
-    if (regex.test(email) && password.length >= minValue && name.length < maxValue) {
+    if (regex.test(email) && password.length >= minValue
+    && name.length >= maxValue) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
@@ -30,15 +31,13 @@ function Register() {
       body: JSON.stringify({ email, password, name }),
     });
     const numberError = 409;
-    const user = await response.json();
+    console.log(response.status);
     if (response.status === numberError) {
       setIsUserInvalid(true);
       return;
     }
 
-    if (user.role === 'customer') {
-      push('/customer/products');
-    }
+    push('/customer/products');
   };
 
   return (
