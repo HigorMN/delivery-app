@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import api from '../../utils/api';
 
 export default function Login() {
@@ -7,6 +7,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [inputError, setInputError] = useState();
   const [isLogged, setIsLogged] = useState(false);
+  const { push } = useHistory();
 
   const handleSubmit = async () => {
     api.post('/login', { email, password })
@@ -59,6 +60,7 @@ export default function Login() {
 
           </button>
           <button
+            onClick={ () => push('/register') }
             type="button"
             data-testid="common_login__button-register"
           >
