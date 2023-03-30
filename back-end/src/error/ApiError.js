@@ -22,6 +22,10 @@ class ApiError {
   static badRequest(message) {
     throw new ApiError(message, StatusCodes.BAD_REQUEST);
   }
+
+  static conflict(message) {
+    throw new ApiError(message, StatusCodes.CONFLICT);
+  }
 }
 
 module.exports = ApiError;
