@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Link from '../GenericLink';
 
 const ROUTE_CUSTOMER = 'customer_products';
@@ -8,6 +9,9 @@ const ELEMENT_USER = 'element-navbar-user-full-name';
 const ELEMENT_LOGOUT = 'element-navbar-link-logout';
 
 export default function Header() {
+  const localUser = JSON.parse(localStorage.getItem('user'));
+
+  if (!localUser) return <Redirect to="/login" />;
   return (
     <header>
       <nav>
@@ -25,7 +29,7 @@ export default function Header() {
       <nav>
         <Link
           to="/"
-          title="Nome Completo"
+          title={ localUser ? localUser.name : '' }
           dataTestId={ `${ROUTE_CUSTOMER}__${ELEMENT_USER}` }
         />
         <Link

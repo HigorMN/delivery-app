@@ -5,7 +5,7 @@ const errorHandler = async (error, _req, res, _next) => {
       if (!error.message) return res.status(error.statusCode).json('');
       return res.status(error.statusCode).json({ message: error.message });
     }
-    res.status(500).json({ message: error });
+    res.status(500).json({ message: error.message });
   };
 
 module.exports = errorHandler;

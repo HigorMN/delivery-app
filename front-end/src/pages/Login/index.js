@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import api from '../../utils/api';
 
@@ -8,9 +8,15 @@ export default function Login() {
   const [inputError, setInputError] = useState();
   const [isLogged, setIsLogged] = useState(false);
 
+  useEffect(() => {
+    const localUser = JSON.parse(localStorage.getItem('user'));
+    if (localUser) setIsLogged(true);
+  }, []);
+
   const handleSubmit = async () => {
     api.post('/login', { email, password })
-      .then(() => {
+      .then((res) => {
+        localStorage.setItem('user', JSON.stringify(res.data));
         setIsLogged(true);
       })
       .catch((err) => {
@@ -21,7 +27,7 @@ export default function Login() {
   if (isLogged) return <Redirect to="/customer/products" />;
 
   return (
-    <>
+    <div>
       <Redirect to="/login" />
       <div>
         <img src="" alt="" />
@@ -46,9 +52,7 @@ export default function Login() {
               id="password"
               data-testid="common_login__input-password"
             />
-
           </label>
-
           <button
             onClick={ handleSubmit }
             disabled={ !(password.length >= +'6' && /\S+[@]\w+[.]\w+/gi.test(email)) }
@@ -56,7 +60,6 @@ export default function Login() {
             data-testid="common_login__button-login"
           >
             LOGIN
-
           </button>
           <button
             type="button"
@@ -66,9 +69,8 @@ export default function Login() {
           </button>
         </form>
         { inputError
-         && <p data-testid="common_login__element-invalid-email">{inputError}</p>}
+           && <p data-testid="common_login__element-invalid-email">{inputError}</p>}
       </div>
-
-    </>
+    </div>
   );
 }

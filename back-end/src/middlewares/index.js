@@ -3,7 +3,6 @@ const ApiError = require('../error/ApiError');
 
 const validateUserExists = async (req, _res, next) => {
   const { email } = req.body;
-  console.log(req.body);
   const user = await User.findOne({ 
     where: { email },
    });
