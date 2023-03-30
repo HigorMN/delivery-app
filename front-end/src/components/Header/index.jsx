@@ -11,6 +11,8 @@ const ELEMENT_LOGOUT = 'element-navbar-link-logout';
 export default function Header() {
   const localUser = JSON.parse(localStorage.getItem('user'));
 
+  const handleLogOut = () => localStorage.removeItem('user');
+
   if (!localUser) return <Redirect to="/login" />;
   return (
     <header>
@@ -34,6 +36,7 @@ export default function Header() {
         />
         <Link
           to="/"
+          onClick={ handleLogOut }
           title="Sair"
           dataTestId={ `${ROUTE_CUSTOMER}__${ELEMENT_LOGOUT}` }
         />

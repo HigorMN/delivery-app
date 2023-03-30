@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function GenericLink(props) {
-  const { to, dataTestId, className, title } = props;
+  const { to, dataTestId, className, title, onClick } = props;
   return (
     <Link
       to={ to }
       data-testid={ dataTestId }
+      onClick={ onClick }
       className={ className }
     >
       { title }
@@ -20,6 +21,7 @@ GenericLink.defaultProps = {
   dataTestId: '',
   className: '',
   title: '',
+  onClick: () => {},
 };
 
 GenericLink.propTypes = {
@@ -27,4 +29,5 @@ GenericLink.propTypes = {
   dataTestId: PropTypes.string,
   className: PropTypes.string,
   title: PropTypes.node,
+  onClick: PropTypes.func,
 };
