@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import CardProduct from '../../components/CardProduct';
 import Header from '../../components/Header';
 import api from '../../utils/api';
@@ -8,6 +9,7 @@ import currencyFormart from '../../utils/currencyFormart';
 function Costumer() {
   const [dataProduct, setDataProduct] = useState([]);
   const { product } = useContext(productContext);
+  const { push } = useHistory();
 
   const getProduct = async () => {
     const { data } = await api.get('/products');
@@ -34,6 +36,8 @@ function Costumer() {
         <button
           data-testid="customer_products__button-cart"
           type="button"
+          onClick={ () => push('/customer/checkout') }
+          disabled={ product.length === 0 }
         >
           Ver Carrinho: R$
           <span data-testid="customer_products__checkout-bottom-value">
