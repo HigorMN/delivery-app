@@ -39,6 +39,7 @@ export default function Login() {
             <input
               value={ email }
               onChange={ ({ target: { value } }) => setEmail(value) }
+              name="email"
               type="email"
               id="login"
               data-testid="common_login__input-email"
@@ -49,6 +50,7 @@ export default function Login() {
             <input
               onChange={ ({ target: { value } }) => setPassword(value) }
               value={ password }
+              name="password"
               type="password"
               id="password"
               data-testid="common_login__input-password"
