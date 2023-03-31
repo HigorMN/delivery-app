@@ -13,7 +13,7 @@ function Costumer() {
 
   useEffect(() => {
     getProduct();
-  });
+  }, []);
 
   return (
     <>
@@ -26,7 +26,6 @@ function Costumer() {
             image={ e.urlImage }
             name={ e.name }
             price={ e.price }
-            quantity={ 0 }
           />
         ))}
       </main>
