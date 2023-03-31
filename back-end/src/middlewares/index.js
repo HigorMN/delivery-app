@@ -16,7 +16,7 @@ const validateNameExists = async (req, _res, next) => {
 
   const userName = await findUser('name', name);
   const userEmail = await findUser('email', email);
-  console.log('Usuario', userName, 'Email', userEmail);
+
   if (userName || userEmail) return ApiError.conflict();
    next();
 };
