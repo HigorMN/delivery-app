@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import api from '../../utils/api';
 
 function Register() {
   const [name, setName] = useState('');
@@ -22,22 +23,12 @@ function Register() {
   }, [email, password, name]);
 
   const handleClick = async () => {
-    const response = await fetch('http://localhost:3001/register', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password, name }),
-    });
-    const numberError = 409;
-    console.log(response.status);
-    if (response.status === numberError) {
-      setIsUserInvalid(true);
-      return;
-    }
-
-    push('/customer/products');
+    await api.post('/register', { email, password, name })
+      .then((res) => {
+        localStorage.setItem('user', JSON.stringify(res.data));
+        push('/customer/products');
+      })
+      .catch(() => setIsUserInvalid(true));
   };
 
   return (
@@ -83,12 +74,11 @@ function Register() {
           CADASTRAR
         </button>
       </form>
-      <p
-        data-testid="common_register__element-invalid_register"
-        style={ { display: isUserInvalid ? 'block' : 'none' } }
-      >
-        Mensagem de erro
-      </p>
+      { isUserInvalid && (
+        <p data-testid="common_register__element-invalid_register">
+          Mensagem de erro
+        </p>
+      )}
     </div>
   );
 }

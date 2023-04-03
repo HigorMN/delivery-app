@@ -1,28 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
-import api from '../../utils/api';
+import api, { setToken } from '../../utils/api';
+import getAuth from '../../utils/authentication';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [inputError, setInputError] = useState();
-  const [isLogged, setIsLogged] = useState(false);
+  const [userAuthenticated, setUserAuthenticated] = useState(false);
   const { push } = useHistory();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return setUserAuthenticated(false);
+
+    setToken(user.token);
+    getAuth(user.token);
+  }, []);
 
   const handleSubmit = async () => {
     api.post('/login', { email, password })
-      .then(() => {
-        setIsLogged(true);
+      .then((res) => {
+        localStorage.setItem('user', JSON.stringify(res.data));
+        setUserAuthenticated(true);
       })
       .catch((err) => {
+        console.log(err);
         if (err.response.status === +'404') return setInputError('Email não existe');
       });
   };
 
-  if (isLogged) return <Redirect to="/customer/products" />;
+  if (userAuthenticated) return <Redirect to="/customer/products" />;
 
   return (
-    <>
+    <div>
       <Redirect to="/login" />
       <div>
         <img src="" alt="" />
@@ -33,6 +44,7 @@ export default function Login() {
             <input
               value={ email }
               onChange={ ({ target: { value } }) => setEmail(value) }
+              name="email"
               type="email"
               id="login"
               data-testid="common_login__input-email"
@@ -43,13 +55,12 @@ export default function Login() {
             <input
               onChange={ ({ target: { value } }) => setPassword(value) }
               value={ password }
+              name="password"
               type="password"
               id="password"
               data-testid="common_login__input-password"
             />
-
           </label>
-
           <button
             onClick={ handleSubmit }
             disabled={ !(password.length >= +'6' && /\S+[@]\w+[.]\w+/gi.test(email)) }
@@ -57,7 +68,6 @@ export default function Login() {
             data-testid="common_login__button-login"
           >
             LOGIN
-
           </button>
           <button
             onClick={ () => push('/register') }
@@ -68,9 +78,8 @@ export default function Login() {
           </button>
         </form>
         { inputError
-         && <p data-testid="common_login__element-invalid-email">{inputError}</p>}
+           && <p data-testid="common_login__element-invalid-email">{inputError}</p>}
       </div>
-
-    </>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 const md5 = require('md5');
-const { response, responseError } = require('../utils/response');
+const generateJwt = require('../utils/generateJwt');
 const { User } = require('../database/models');
-// const ApiError = require('../error/ApiError');
+const { response, responseError } = require('../utils/response');
 
 const userLogin = async (payload) => {
   const { email, password } = payload;
@@ -11,7 +11,15 @@ const userLogin = async (payload) => {
   if (hashed !== user.password) {
     return responseError(404, 'credenciais inválidas');
   }
-  return response(200, '');
+
+  const userPayload = {
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
+  const token = generateJwt(userPayload);
+
+  return response(200, { ...userPayload, token });
 };
 
 module.exports = { userLogin };
