@@ -1,6 +1,19 @@
+const fs = require('fs');
+const jwt = require('jsonwebtoken');
 const { User } = require('../database/models');
 const ApiError = require('../error/ApiError');
 const { findUser } = require('../services/register.service');
+
+const authenticate = (req, res) => {
+  const { authorization } = req.headers;
+  console.log(req.headers);
+  jwt.verify(authorization, fs.readFileSync('jwt.evaluation.key', 'utf8'), (err, _decoded) => {
+    if (err) {
+      return res.json({ status: 401, message: 'Unauthorized' });
+    }
+    res.json({ status: 200, message: 'Ok' });
+  });
+};
 
 const validateUserExists = async (req, _res, next) => {
   const { email } = req.body;
@@ -21,4 +34,4 @@ const validateNameExists = async (req, _res, next) => {
    next();
 };
 
-module.exports = { validateUserExists, validateNameExists };
+module.exports = { validateUserExists, validateNameExists, authenticate };

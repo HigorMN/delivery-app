@@ -1,31 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
-import api from '../../utils/api';
+import api, { setToken } from '../../utils/api';
+import getAuth from '../../utils/authentication';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [inputError, setInputError] = useState();
-  const [isLogged, setIsLogged] = useState(false);
+  const [userAuthenticated, setUserAuthenticated] = useState(false);
   const { push } = useHistory();
 
   useEffect(() => {
-    const localUser = JSON.parse(localStorage.getItem('user'));
-    if (localUser) setIsLogged(true);
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return setUserAuthenticated(false);
+
+    setToken(user.token);
+    getAuth(user.token);
   }, []);
 
   const handleSubmit = async () => {
     api.post('/login', { email, password })
       .then((res) => {
         localStorage.setItem('user', JSON.stringify(res.data));
-        setIsLogged(true);
+        setUserAuthenticated(true);
       })
       .catch((err) => {
+        console.log(err);
         if (err.response.status === +'404') return setInputError('Email não existe');
       });
   };
 
-  if (isLogged) return <Redirect to="/customer/products" />;
+  if (userAuthenticated) return <Redirect to="/customer/products" />;
 
   return (
     <div>
