@@ -7,7 +7,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [inputError, setInputError] = useState();
-  const [userAuthenticated, setUserAuthenticated] = useState(false);
+  const [userAuthenticated, setUserAuthenticated] = useState('role');
   const { push } = useHistory();
 
   useEffect(() => {
@@ -19,18 +19,21 @@ export default function Login() {
   }, []);
 
   const handleSubmit = async () => {
-    api.post('/login', { email, password })
+    api
+      .post('/login', { email, password })
       .then((res) => {
         localStorage.setItem('user', JSON.stringify(res.data));
-        setUserAuthenticated(true);
+        setUserAuthenticated(res.data.role);
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.status === +'404') return setInputError('Email não existe');
+        if (err.response.status === +'404') { return setInputError('Email não existe'); }
       });
   };
 
-  if (userAuthenticated) return <Redirect to="/customer/products" />;
+  if (userAuthenticated === 'customer') return <Redirect to="/customer/products" />;
+  if (userAuthenticated === 'seller') return <Redirect to="/seller/orders" />;
+  if (userAuthenticated === 'administrator') return <Redirect to="/admin/manage" />;
 
   return (
     <div>
@@ -63,7 +66,9 @@ export default function Login() {
           </label>
           <button
             onClick={ handleSubmit }
-            disabled={ !(password.length >= +'6' && /\S+[@]\w+[.]\w+/gi.test(email)) }
+            disabled={
+              !(password.length >= +'6' && /\S+[@]\w+[.]\w+/gi.test(email))
+            }
             type="button"
             data-testid="common_login__button-login"
           >
@@ -77,8 +82,9 @@ export default function Login() {
             Ainda não tenho conta
           </button>
         </form>
-        { inputError
-           && <p data-testid="common_login__element-invalid-email">{inputError}</p>}
+        {inputError && (
+          <p data-testid="common_login__element-invalid-email">{inputError}</p>
+        )}
       </div>
     </div>
   );
