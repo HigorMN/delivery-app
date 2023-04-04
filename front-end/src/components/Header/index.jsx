@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import NavSeller from '../NavSeller';
 import NavCustomer from '../NavCustomer';
 
 export default function Header() {
@@ -8,6 +9,7 @@ export default function Header() {
   return (
     <header>
       { pathname.includes('customer') && <NavCustomer /> }
+      { pathname.includes('seller') && <NavSeller /> }
     </header>
   );
 }
