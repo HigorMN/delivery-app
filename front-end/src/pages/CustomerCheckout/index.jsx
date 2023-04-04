@@ -1,11 +1,23 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import Context from '../../hooks/productContext';
 import currencyFormart from '../../utils/currencyFormart';
 
 const dt = 'customer_checkout__element-order-table';
 export default function CustomerCheckout() {
-  const { product } = useContext(Context);
+  const { push } = useHistory();
+  const { product, setProduct } = useContext(Context);
+
+  const handleClick = () => {
+    push(`/customer/orders/${id}`);
+  };
+
+  const removeItem = (index) => {
+    const itens = product.filter((_p, i) => i !== index);
+    setProduct(itens);
+  };
+
   return (
     <>
       <Header />
@@ -34,7 +46,10 @@ export default function CustomerCheckout() {
                 {currencyFormart(p.subTotal)}
               </td>
               <td data-testid={ `${dt}-remove-${index}` }>
-                <button type="button">
+                <button
+                  onClick={ () => removeItem(index) }
+                  type="button"
+                >
                   Remover
                 </button>
               </td>
@@ -42,7 +57,14 @@ export default function CustomerCheckout() {
           ))}
         </tbody>
       </table>
-      <div data-testid="customer_checkout__element-order-total-price">Total</div>
+      <h3>
+        Total:
+      </h3>
+      <p data-testid="customer_checkout__element-order-total-price">
+        { currencyFormart(
+          product.reduce((acc, cur) => acc + cur.subTotal, 0),
+        )}
+      </p>
       <form>
         <h2>Detalhes e Endereço para Entrega</h2>
         <label htmlFor="seller">
@@ -73,6 +95,7 @@ export default function CustomerCheckout() {
         <button
           data-testid="customer_checkout__button-submit-order"
           type="button"
+          onClick={ handleClick }
         >
           FINALIZAR PEDIDO
         </button>
