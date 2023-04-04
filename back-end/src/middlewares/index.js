@@ -6,7 +6,7 @@ const { findUser } = require('../services/register.service');
 
 const authenticate = (req, res) => {
   const { authorization } = req.headers;
-  console.log(req.headers);
+
   jwt.verify(authorization, fs.readFileSync('jwt.evaluation.key', 'utf8'), (err, _decoded) => {
     if (err) {
       return res.json({ status: 401, message: 'Unauthorized' });
