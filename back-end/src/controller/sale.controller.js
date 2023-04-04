@@ -1,4 +1,4 @@
-const saleService = require('../services/sales.service');
+const saleService = require('../services/sale.service');
 const validateJwt = require('../utils/validateJwt');
 
 const getAll = async (req, res) => {

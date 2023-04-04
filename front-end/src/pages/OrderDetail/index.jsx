@@ -16,7 +16,6 @@ function OrderDetails({ match }) {
       api.get(`/sales/${id}`)
         .then(({ data }) => {
           const saleDate = toStringDate(data.saleDate);
-          console.log(data);
           setSaleData({ ...data, saleDate });
         });
     };

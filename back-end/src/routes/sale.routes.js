@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
-const { getAll, getOne } = require('../controller/sales.controller');
+const { getAll, getOne } = require('../controller/sale.controller');
 
 const saleRoutes = Router();
 
