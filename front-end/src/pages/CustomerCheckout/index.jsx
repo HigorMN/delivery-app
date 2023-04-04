@@ -3,10 +3,9 @@ import Header from '../../components/Header';
 import Context from '../../hooks/productContext';
 import currencyFormart from '../../utils/currencyFormart';
 
+const dt = 'customer_checkout__element-order-table';
 export default function CustomerCheckout() {
   const { product } = useContext(Context);
-  const dt = 'customer_checkout__element-order-table';
-  console.log(product);
   return (
     <>
       <Header />
