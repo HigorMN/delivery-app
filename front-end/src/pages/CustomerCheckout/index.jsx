@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 // import { useHistory } from 'react-router-dom';
-// import api from '../../utils/api';
+import api from '../../utils/api';
 import Header from '../../components/Header';
 import Context from '../../hooks/productContext';
 import currencyFormart from '../../utils/currencyFormart';
@@ -9,41 +9,31 @@ const dt = 'customer_checkout__element-order-table';
 export default function CustomerCheckout() {
   // const { push } = useHistory();
   const { product, setProduct } = useContext(Context);
-  const [address, setAddress] = useState('');
-  const [number, setNumber] = useState('');
-  const [total, setTotal] = useState(currencyFormart(
+
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [deliveryNumber, setDeliveryNumber] = useState('');
+  const [sellerData, setSellerData] = useState([]);
+  const [sellerId, setSellerId] = useState('');
+  const [totalPrice, setTotalPrice] = useState(
     product.reduce((acc, cur) => acc + cur.subTotal, 0),
-  ));
-  // const [seller, setSeller] = useState([]);
-  // const [email, setEmail] = useState([]);
+  );
+  const getSeller = async () => {
+    const { data } = await api.get('/user/seller');
+    setSellerData(data);
+    setSellerId(data[0].id);
+  };
 
-  // const handleClick = () => {
-  //   setEmail(JSON.parse(localStorage.getItem('user')));
-  //   const findUser = email.find((e) => e.email === email);
+  useEffect(() => { getSeller(); }, []);
 
-  //   const sale = {
-  //     userId: findUser.id,
-  //     sellerId: seller,
-  //     totalPrice: Number(total),
-  //     deliveryAddress: address,
-  //     deliveryNumber: number,
-  //   };
-  //   api
-  //     .post('/customer/checkout', { sale })
-  //     .then((res) => {
-  //       localStorage.setItem('sale', JSON.stringify(res.data));
-  //       setUserAuthenticated(res.data.role);
-  //     })
-  //     .catch((err) => {
-  //       if (err.response.status === +'404') { return setInputError('Email não existe'); }
-  //     });
-  //   push(`/customer/orders/${id}`);
-  // };
+  const handleClick = () => {
+    api.post('/sale', { sellerId, totalPrice, deliveryAddress, deliveryNumber, product })
+      .then((res) => console.log(res));
+  };
 
   const removeItem = (index) => {
     const itens = product.filter((_p, i) => i !== index);
     setProduct(itens);
-    setTotal(currencyFormart(
+    setTotalPrice(currencyFormart(
       itens.reduce((acc, cur) => acc + cur.subTotal, 0),
     ));
   };
@@ -91,7 +81,7 @@ export default function CustomerCheckout() {
         Total:
       </h3>
       <p data-testid="customer_checkout__element-order-total-price">
-        {total}
+        {currencyFormart(totalPrice)}
       </p>
       <form>
         <h2>Detalhes e Endereço para Entrega</h2>
@@ -100,8 +90,12 @@ export default function CustomerCheckout() {
           <select
             data-testid="customer_checkout__select-seller"
             name="seller"
+            value={ sellerId }
+            onChange={ ({ target: { value } }) => setSellerId(value) }
           >
-            <option>Fulana</option>
+            {sellerData.map((e, index) => (
+              <option key={ index } value={ e.id }>{e.name}</option>
+            ))}
           </select>
         </label>
         <label htmlFor="address">
@@ -110,8 +104,8 @@ export default function CustomerCheckout() {
             data-testid="customer_checkout__input-address"
             name="address"
             type="text"
-            value={ address }
-            onChange={ (e) => setAddress(e.target.value) }
+            value={ deliveryAddress }
+            onChange={ (e) => setDeliveryAddress(e.target.value) }
           />
         </label>
         <label htmlFor="number">
@@ -120,8 +114,8 @@ export default function CustomerCheckout() {
             data-testid="customer_checkout__input-address-number"
             name="number"
             type="text"
-            value={ number }
-            onChange={ (e) => setNumber(e.target.value) }
+            value={ deliveryNumber }
+            onChange={ (e) => setDeliveryNumber(e.target.value) }
           />
         </label>
         <button
