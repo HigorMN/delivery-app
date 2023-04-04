@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import CostumerProducts from './pages/CostumerProducts';
 import ProviderProduct from './hooks/productContext/Provider';
 import CustomerCheckout from './pages/CustomerCheckout';
+import CustomerOrderDetails from './pages/CustomerOrderDetails';
 import AdminManage from './pages/AdminManage';
 import ProviderAuth from './hooks/authContext/Provider';
 
@@ -20,6 +21,7 @@ function App() {
           <ProviderProduct>
             <Route exact path="/customer/products" component={ CostumerProducts } />
             <Route exact path="/customer/checkout" component={ CustomerCheckout } />
+            <Route exact path="/customer/orders/:id" component={ CustomerOrderDetails } />
           </ProviderProduct>
           <Route exact path="/admin/manage" component={ AdminManage } />
         </ProviderAuth>
