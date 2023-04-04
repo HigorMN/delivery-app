@@ -35,4 +35,9 @@ const findUsers = async () => {
   return response(200, find);
 };
 
-module.exports = { userLogin, findUsers, findByToken };
+const deleteUser = async (id) => {
+  const destroy = await User.destroy({ where: { id } });
+  return response(204, destroy);
+};
+
+module.exports = { userLogin, findUsers, findByToken, deleteUser };

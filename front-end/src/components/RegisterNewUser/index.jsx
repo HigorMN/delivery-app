@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import api from '../../utils/api';
+import adminContext from '../../hooks/adminContext';
 
 export default function RegisterNewUser() {
+  const { getUsers } = useContext(adminContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +19,7 @@ export default function RegisterNewUser() {
 
   const handleClick = () => {
     api.post('/register', { name, email, password, role })
-      .then()
+      .then(() => getUsers())
       .catch(() => setMessageErro('Nome ou E-mail já cadastrado'));
     clearInputs();
   };

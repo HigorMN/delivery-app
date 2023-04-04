@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
-const { login, getUsers } = require('../controller/users.controller');
+const { login, getUsers, deleteUser } = require('../controller/users.controller');
 
 const { validateUserExists, authenticate } = require('../middlewares');
 const auth = require('../middlewares/auth');
@@ -20,5 +20,6 @@ userRoutes.get(
 );
 
 userRoutes.get('/users', rescue(auth), rescue(getUsers));
+userRoutes.delete('/user/:id', rescue(auth), rescue(deleteUser));
 
 module.exports = userRoutes;

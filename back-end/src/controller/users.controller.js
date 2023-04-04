@@ -14,7 +14,17 @@ const getUsers = async (req, res) => {
   return res.status(status).json(message);
 };
 
+const deleteUser = async (req, res) => {
+  const { role } = req.user;
+  if (role !== 'administrator') return res.status(401).json({ message: 'user not auth' });
+
+  const { id } = req.params;
+  const { status, message } = await userService.deleteUser(id);
+  return res.status(status).json(message);
+};
+
 module.exports = {
   login,
   getUsers,
+  deleteUser,
 };

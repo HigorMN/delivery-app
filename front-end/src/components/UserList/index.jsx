@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import adminContext from '../../hooks/adminContext';
+import api from '../../utils/api';
 
 export default function UserList() {
   const { dataUsers, getUsers } = useContext(adminContext);
@@ -7,7 +8,11 @@ export default function UserList() {
   useEffect(() => {
     getUsers();
   }, [getUsers]);
-  console.log('ta chamando?');
+
+  const handleClick = async (id) => {
+    await api.delete(`/user/${id}`);
+    getUsers();
+  };
 
   return (
     <>
@@ -49,6 +54,7 @@ export default function UserList() {
                 <button
                   type="button"
                   data-testid={ `admin_manage__element-user-table-remove-${index}` }
+                  onClick={ () => handleClick(e.id) }
                 >
                   Excluir
                 </button>
