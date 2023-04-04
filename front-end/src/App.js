@@ -9,6 +9,7 @@ import CustomerCheckout from './pages/CustomerCheckout';
 import SellerOrders from './pages/SellerOrders';
 import AdminManage from './pages/AdminManage';
 import ProviderAuth from './hooks/authContext/Provider';
+import OrderDetails from './pages/OrderDetail';
 
 function App() {
   return (
@@ -22,8 +23,9 @@ function App() {
             <Route exact path="/customer/products" component={ CostumerProducts } />
             <Route exact path="/customer/checkout" component={ CustomerCheckout } />
           </ProviderProduct>
-          <Route exact path="/seller/orders" component={ SellerOrders } />
           <Route exact path="/admin/manage" component={ AdminManage } />
+          <Route exact path="/seller/orders" component={ SellerOrders } />
+          <Route exact path="/seller/orders/:id" component={ OrderDetails } />
         </ProviderAuth>
       </Switch>
     </BrowserRouter>

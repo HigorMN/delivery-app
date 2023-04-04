@@ -11,11 +11,6 @@ export default function NavCustomer() {
   const localUser = JSON.parse(localStorage.getItem('user'));
   const handleLogOut = () => localStorage.removeItem('user');
 
-  if (!localUser || localUser.role !== 'customer') {
-    handleLogOut();
-    return <Redirect to="/login" />;
-  }
-
   return (
     <>
       <nav>
