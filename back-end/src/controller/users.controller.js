@@ -23,8 +23,14 @@ const deleteUser = async (req, res) => {
   return res.status(status).json(message);
 };
 
+const getSeller = async (req, res) => {
+  const { status, message } = await userService.findSeller();
+  return res.status(status).json(message);
+};
+
 module.exports = {
   login,
   getUsers,
   deleteUser,
+  getSeller,
 };

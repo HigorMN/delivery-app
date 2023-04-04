@@ -40,4 +40,12 @@ const deleteUser = async (id) => {
   return response(204, destroy);
 };
 
-module.exports = { userLogin, findUsers, findByToken, deleteUser };
+const findSeller = async () => {
+  const find = await User.findAll({ 
+    where: { role: 'seller' },
+    attributes: { exclude: ['password'] },
+  });
+
+  return response(200, find);
+};
+module.exports = { userLogin, findUsers, findByToken, deleteUser, findSeller };
