@@ -4,10 +4,10 @@ const { User } = require('../database/models');
 const generateJwt = require('../utils/generateJwt');
 
 const createRegister = async (body) => {
-  const { name, email, password } = body;
+  const { name, email, password, role } = body;
   const hashed = md5(password);
 
-  const userPayload = { name, email, role: 'customer' };
+  const userPayload = { name, email, role: role || 'customer' };
   await User.create({ ...userPayload, password: hashed });
   
   const token = generateJwt(userPayload);
