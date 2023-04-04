@@ -1,7 +1,9 @@
 const md5 = require('md5');
 const generateJwt = require('../utils/generateJwt');
-const { User } = require('../database/models');
+const { User, Sequelize } = require('../database/models');
 const { response, responseError } = require('../utils/response');
+
+const { Op } = Sequelize;
 
 const userLogin = async (payload) => {
   const { email, password } = payload;
@@ -22,4 +24,15 @@ const userLogin = async (payload) => {
   return response(200, { ...userPayload, token });
 };
 
-module.exports = { userLogin };
+const findByToken = async ({ name, email, role }) => User.findOne({ where: { name, email, role } });
+
+const findUsers = async () => {
+  const find = await User.findAll({ 
+    where: { role: { [Op.ne]: 'administrator' } },
+    attributes: { exclude: ['password'] },
+  });
+
+  return response(200, find);
+};
+
+module.exports = { userLogin, findUsers, findByToken };
