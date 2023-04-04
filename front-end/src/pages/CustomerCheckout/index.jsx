@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import api from '../../utils/api';
 import Header from '../../components/Header';
 import Context from '../../hooks/productContext';
@@ -7,7 +7,7 @@ import currencyFormart from '../../utils/currencyFormart';
 
 const dt = 'customer_checkout__element-order-table';
 export default function CustomerCheckout() {
-  // const { push } = useHistory();
+  const { push } = useHistory();
   const { product, setProduct } = useContext(Context);
 
   const [deliveryAddress, setDeliveryAddress] = useState('');
@@ -27,7 +27,7 @@ export default function CustomerCheckout() {
 
   const handleClick = () => {
     api.post('/sale', { sellerId, totalPrice, deliveryAddress, deliveryNumber, product })
-      .then((res) => console.log(res));
+      .then((res) => push(`/customer/orders/${res.data.id}`));
   };
 
   const removeItem = (index) => {
