@@ -26,7 +26,6 @@ export default function Login() {
         setUserAuthenticated(res.data.role);
       })
       .catch((err) => {
-        console.log(err);
         if (err.response.status === +'404') { return setInputError('Email não existe'); }
       });
   };
