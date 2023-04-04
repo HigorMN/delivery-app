@@ -62,6 +62,7 @@ export default function RegisterNewUser() {
         <button
           type="button"
           data-testid="admin_manage__button-register"
+          disabled={ name.length < +'12' || !(/\S+[@]\w+[.]\w+/gi.test(email)) || password.length < +'6' }
         >
           CADASTRAR
         </button>
