@@ -14,7 +14,7 @@ function SaleCard({ sale }) {
         to={ `/seller/orders/${sale.id}` }
       >
         <p
-          data-testid={ `${ROUTE_SELLER}__${ORDER_ELEMENT}-${sale.id}` }
+          data-testid={ `${ROUTE_SELLER}__${ORDER_ELEMENT}-id-${sale.id}` }
         >
           Pedido:
           {' '}
