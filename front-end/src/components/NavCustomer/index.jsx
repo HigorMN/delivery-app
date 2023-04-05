@@ -21,22 +21,22 @@ export default function NavCustomer() {
     <>
       <nav>
         <Link
-          to="/"
+          to="/customer/products"
           title="PRODUTOS"
           dataTestId={ `${ROUTE_CUSTOMER}__${ELEMENT_PRODUCTS}` }
         />
         <Link
-          to="/"
+          to="/customer/orders"
           title="MEUS PEDIDOS"
           dataTestId={ `${ROUTE_CUSTOMER}__${ELEMENT_ORDERS}` }
         />
       </nav>
       <nav>
-        <Link
-          to="/"
-          title={ localUser ? localUser.name : '' }
-          dataTestId={ `${ROUTE_CUSTOMER}__${ELEMENT_USER}` }
-        />
+        <p
+          data-testid={ `${ROUTE_CUSTOMER}__${ELEMENT_USER}` }
+        >
+          { localUser ? localUser.name : '' }
+        </p>
         <Link
           to="/"
           onClick={ handleLogOut }

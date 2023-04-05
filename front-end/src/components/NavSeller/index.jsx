@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import Link from '../GenericLink';
 
 const ROUTE_CUSTOMER = 'customer_products';
@@ -21,11 +20,11 @@ export default function NavCustomer() {
         />
       </nav>
       <nav>
-        <Link
-          to="/seller/orders"
-          title={ localUser ? localUser.name : '' }
-          dataTestId={ `${ROUTE_CUSTOMER}__${ELEMENT_USER}` }
-        />
+        <p
+          data-testid={ `${ROUTE_CUSTOMER}__${ELEMENT_USER}` }
+        >
+          { localUser ? localUser.name : '' }
+        </p>
         <Link
           to="/"
           onClick={ handleLogOut }
