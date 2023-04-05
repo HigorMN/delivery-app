@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
-import api, { setToken } from '../../utils/api';
-import getAuth from '../../utils/authentication';
+import api from '../../utils/api';
+import auth from '../../utils/authentication';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [inputError, setInputError] = useState();
   const [userAuthenticated, setUserAuthenticated] = useState('role');
+
   const { push } = useHistory();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) return setUserAuthenticated(false);
+    if (!user) return setUserAuthenticated('role');
 
-    setToken(user.token);
-    getAuth(user.token);
+    setUserAuthenticated(user.role);
+    auth();
   }, []);
 
   const handleSubmit = async () => {

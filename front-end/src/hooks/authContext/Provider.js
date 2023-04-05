@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import Context from '.';
 import api, { setToken } from '../../utils/api';
+import auth from '../../utils/authentication';
 
 function Provider({ children }) {
   const [userAuthenticated, setUserAuthenticated] = useState(true);
 
   const handleLogOut = () => localStorage.removeItem('user');
   const getAuth = () => {
+    auth();
     api.get('/authentication')
       .then(({ data: { status } }) => {
         if (status === +'401') return setUserAuthenticated(false);
