@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
-import api, { setToken } from '../../utils/api';
+import api from '../../utils/api';
 import SaleCard from '../../components/SaleCard';
+import auth from '../../utils/authentication';
 
 function SellerOrders() {
-  const [sellerSales, setSellerSales] = useState();
-  const { token } = JSON.parse(localStorage.getItem('user'));
+  const [sellerSales, setSellerSales] = useState([]);
 
   useEffect(() => {
     const getSales = async () => {
-      setToken(token);
+      auth();
       api.get('/sales')
         .then(({ data }) => {
           setSellerSales(data);
         });
     };
     getSales();
-  }, [token]);
+  }, []);
 
   return (
     <div>
       <Header />
       {
-        sellerSales && sellerSales.map((sale) => (
+        sellerSales.map((sale) => (
           <SaleCard key={ sale.id } sale={ sale } />
         ))
       }

@@ -12,6 +12,7 @@ import ProviderAuth from './hooks/authContext/Provider';
 import OrderDetails from './pages/OrderDetail';
 import CustomerOrderDetails from './pages/CustomerOrderDetails';
 import ProviderAdmin from './hooks/adminContext/Provider';
+import CustomerOrders from './pages/CustomerOrders';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <ProviderProduct>
             <Route exact path="/customer/products" component={ CostumerProducts } />
             <Route exact path="/customer/checkout" component={ CustomerCheckout } />
+            <Route exact path="/customer/orders" component={ CustomerOrders } />
             <Route exact path="/customer/orders/:id" component={ CustomerOrderDetails } />
           </ProviderProduct>
           <Route exact path="/seller/orders" component={ SellerOrders } />
