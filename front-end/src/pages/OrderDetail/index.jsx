@@ -23,6 +23,10 @@ function OrderDetails({ match }) {
     getSaleData();
   }, [id]);
 
+  // const handleChangeStatus = ({ target: { value } }) => {
+  //   // request
+  // };
+
   return (
     <div>
       <Header />
@@ -61,12 +65,18 @@ function OrderDetails({ match }) {
 
             <div>
               <button
+                // onClick={ handleChangeStatus }
+                value="Preparando"
+                disabled={ saleData.status !== 'Pendente' }
                 data-testid={ `${ROUTE_SELLER}__button-preparing-check` }
                 type="button"
               >
                 PREPARAR PEDIDO
               </button>
               <button
+                // onClick={ handleChangeStatus }
+                value="Em Trânsito"
+                disabled={ saleData.status !== 'Preparando' }
                 data-testid={ `${ROUTE_SELLER}__button-dispatch-check` }
                 type="button"
               >
@@ -76,16 +86,14 @@ function OrderDetails({ match }) {
           </header>
 
           <OrderTable saleData={ saleData } />
+
           <span
             data-testid={ `${ROUTE_SELLER}__element-order-total-price` }
             style={ { position: 'fixed', bottom: 0 } }
           >
             { 'Total: '}
             {
-              (saleData.products.reduce((acc, curr) => {
-                acc += (curr.SaleProduct.quantity * Number(curr.price));
-                return acc;
-              }, 0)).toLocaleString('pt-BR', {
+              (Number(saleData.totalPrice)).toLocaleString('pt-BR', {
                 style: 'currency',
                 currency: 'BRL',
                 minimumFractionDigits: 2,
