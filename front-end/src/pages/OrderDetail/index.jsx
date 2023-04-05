@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import api from '../../utils/api';
 import toStringDate from '../../utils/toStringDate';
+import OrderTable from '../../components/OrderTable';
 
 const ROUTE_SELLER = 'seller_order_details';
 const ORDER_ELEMENT = 'element-order-details';
-const TABLE_ORDER_ELEMENT = 'element-order-table';
 
 function OrderDetails({ match }) {
   const { params: { id } } = match;
@@ -75,71 +75,7 @@ function OrderDetails({ match }) {
             </div>
           </header>
 
-          <table>
-            <tr>
-              <th>Item</th>
-              <th>Descrição</th>
-              <th>Quantidade</th>
-              <th>Valor Unitário</th>
-              <th>Sub-total</th>
-            </tr>
-
-            <tbody>
-              { saleData.products.map((product, index) => (
-                <tr key={ product.id }>
-                  <td
-                    data-testid={
-                      `${ROUTE_SELLER}__${TABLE_ORDER_ELEMENT}-item-number-${index + 1}`
-                    }
-                  >
-                    {product.id}
-
-                  </td>
-                  <td
-                    data-testid={
-                      `${ROUTE_SELLER}__${TABLE_ORDER_ELEMENT}-name-${index + 1}`
-                    }
-                  >
-                    {product.name}
-
-                  </td>
-                  <td
-                    data-testid={
-                      `${ROUTE_SELLER}__${TABLE_ORDER_ELEMENT}-quantity-${index + 1}`
-                    }
-                  >
-                    {product.SaleProduct.quantity}
-
-                  </td>
-                  <td
-                    data-testid={
-                      `${ROUTE_SELLER}__${TABLE_ORDER_ELEMENT}-unit-price-${index + 1}`
-                    }
-                  >
-                    {Number(product.price).toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
-                  </td>
-                  <td
-                    data-testid={
-                      `${ROUTE_SELLER}__${TABLE_ORDER_ELEMENT}-sub-total-${index + 1}`
-                    }
-                  >
-                    {(product.SaleProduct.quantity * Number(product.price))
-                      .toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL',
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <OrderTable saleData={ saleData } />
           <span
             data-testid={ `${ROUTE_SELLER}__element-order-total-price` }
             style={ { position: 'fixed', bottom: 0 } }
