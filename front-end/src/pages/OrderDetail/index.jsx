@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header';
-import api from '../../utils/api';
+import api, { setToken } from '../../utils/api';
 import toStringDate from '../../utils/toStringDate';
 import OrderTable from '../../components/OrderTable';
 
@@ -18,14 +18,18 @@ function OrderDetails({ match }) {
         .then(({ data }) => {
           const saleDate = toStringDate(data.saleDate);
           setSaleData({ ...data, saleDate });
+          // setCurrentStatus(saleData.status);
         });
     };
     getSaleData();
-  }, [id]);
+  }, [id, saleData]);
 
-  // const handleChangeStatus = ({ target: { value } }) => {
-  //   // request
-  // };
+  const handleChangeStatus = ({ target: { value } }) => {
+    const { token } = localStorage.getItem('user');
+    setToken(token);
+    api.put(`/sales/${id}`, { status: value })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -59,13 +63,13 @@ function OrderDetails({ match }) {
                 `${ROUTE_SELLER}__${ORDER_ELEMENT}-label-delivery-status`
               }
             >
-              {saleData.status}
+              {saleData.status || ''}
 
             </span>
 
             <div>
               <button
-                // onClick={ handleChangeStatus }
+                onClick={ handleChangeStatus }
                 value="Preparando"
                 disabled={ saleData.status !== 'Pendente' }
                 data-testid={ `${ROUTE_SELLER}__button-preparing-check` }
@@ -74,7 +78,7 @@ function OrderDetails({ match }) {
                 PREPARAR PEDIDO
               </button>
               <button
-                // onClick={ handleChangeStatus }
+                onClick={ handleChangeStatus }
                 value="Em Trânsito"
                 disabled={ saleData.status !== 'Preparando' }
                 data-testid={ `${ROUTE_SELLER}__button-dispatch-check` }

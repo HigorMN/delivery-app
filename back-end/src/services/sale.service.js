@@ -1,5 +1,5 @@
 const { Sale, User, SaleProduct, Product } = require('../database/models');
-const { response } = require('../utils/response');
+const { response, responseError } = require('../utils/response');
 
 const getAll = async (userEmail) => {
   const { id } = await User.findOne({ where: { email: userEmail } });
@@ -40,8 +40,15 @@ const create = async (body) => {
     return response(201, sale);
 };
 
+const updateOne = async (id, payload) => {
+  const data = await Sale.update(payload, { where: { id } })
+  .then(() => response(200, ''));
+  return data;
+};
+
 module.exports = {
   getAll,
   getOne,
   create,
+  updateOne,
 };
