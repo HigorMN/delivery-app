@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { currencyFormat } from '../../utils/currencyFormart';
 
-const ROUTE_SELLER = 'seller_order_details';
 const TABLE_ORDER_ELEMENT = 'element-order-table';
 
-function OrderTable({ saleData }) {
+function OrderTable({ saleData, route }) {
   const { products } = saleData;
+
+  const ROUTE = route;
 
   return (
     <table>
@@ -18,21 +20,19 @@ function OrderTable({ saleData }) {
           <th>Sub-total</th>
         </tr>
       </thead>
-
       <tbody>
-        { products.map((product, index) => (
+        { products?.map((product, index) => (
           <tr key={ product.id }>
             <td
               data-testid={
-                `${ROUTE_SELLER}__${TABLE_ORDER_ELEMENT}-item-number-${index + 1}`
+                `${ROUTE}__${TABLE_ORDER_ELEMENT}-item-number-${index}`
               }
             >
-              {product.id}
-
+              {index + 1}
             </td>
             <td
               data-testid={
-                `${ROUTE_SELLER}__${TABLE_ORDER_ELEMENT}-name-${index + 1}`
+                `${ROUTE}__${TABLE_ORDER_ELEMENT}-name-${index + 1}`
               }
             >
               {product.name}
@@ -40,7 +40,7 @@ function OrderTable({ saleData }) {
             </td>
             <td
               data-testid={
-                `${ROUTE_SELLER}__${TABLE_ORDER_ELEMENT}-quantity-${index + 1}`
+                `${ROUTE}__${TABLE_ORDER_ELEMENT}-quantity-${index + 1}`
               }
             >
               {product.SaleProduct.quantity}
@@ -48,28 +48,17 @@ function OrderTable({ saleData }) {
             </td>
             <td
               data-testid={
-                `${ROUTE_SELLER}__${TABLE_ORDER_ELEMENT}-unit-price-${index + 1}`
+                `${ROUTE}__${TABLE_ORDER_ELEMENT}-unit-price-${index + 1}`
               }
             >
-              {Number(product.price).toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
+              {currencyFormat(Number(product.price))}
             </td>
             <td
               data-testid={
-                `${ROUTE_SELLER}__${TABLE_ORDER_ELEMENT}-sub-total-${index + 1}`
+                `${ROUTE}__${TABLE_ORDER_ELEMENT}-sub-total-${index + 1}`
               }
             >
-              {(product.SaleProduct.quantity * Number(product.price))
-                .toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
+              {currencyFormat(product.SaleProduct.quantity * Number(product.price))}
             </td>
           </tr>
         ))}
@@ -80,6 +69,7 @@ function OrderTable({ saleData }) {
 
 OrderTable.propTypes = {
   saleData: PropTypes.shape().isRequired,
+  route: PropTypes.string.isRequired,
 };
 
 export default OrderTable;

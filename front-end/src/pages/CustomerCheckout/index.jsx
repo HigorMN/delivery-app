@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import api from '../../utils/api';
 import Header from '../../components/Header';
 import Context from '../../hooks/productContext';
-import currencyFormart from '../../utils/currencyFormart';
+import FormatDecimal from '../../utils/currencyFormart';
 
 const dt = 'customer_checkout__element-order-table';
 export default function CustomerCheckout() {
@@ -33,7 +33,7 @@ export default function CustomerCheckout() {
   const removeItem = (index) => {
     const itens = product.filter((_p, i) => i !== index);
     setProduct(itens);
-    setTotalPrice(currencyFormart(
+    setTotalPrice(FormatDecimal(
       itens.reduce((acc, cur) => acc + cur.subTotal, 0),
     ));
   };
@@ -60,10 +60,10 @@ export default function CustomerCheckout() {
               <td data-testid={ `${dt}-name-${index}` }>{p.name}</td>
               <td data-testid={ `${dt}-quantity-${index}` }>{p.quantity}</td>
               <td data-testid={ `${dt}-unit-price-${index}` }>
-                {currencyFormart(Number(p.price))}
+                {FormatDecimal(Number(p.price))}
               </td>
               <td data-testid={ `${dt}-sub-total-${index}` }>
-                {currencyFormart(p.subTotal)}
+                {FormatDecimal(p.subTotal)}
               </td>
               <td data-testid={ `${dt}-remove-${index}` }>
                 <button
@@ -81,7 +81,7 @@ export default function CustomerCheckout() {
         Total:
       </h3>
       <p data-testid="customer_checkout__element-order-total-price">
-        {currencyFormart(totalPrice)}
+        {FormatDecimal(totalPrice)}
       </p>
       <form>
         <h2>Detalhes e Endereço para Entrega</h2>
