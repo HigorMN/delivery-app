@@ -1,16 +1,13 @@
 const saleService = require('../services/sale.service');
-const validateJwt = require('../utils/validateJwt');
 
 const getAll = async (req, res) => {
-  const { authorization } = req.headers;
-  const { email: userEmail } = validateJwt(authorization);
-  const { status, message } = await saleService.getAll(userEmail);
+  const { status, message } = await saleService.getAll(req.user.id);
   return res.status(status).json(message);
 };
 
 const getOne = async (req, res) => {
   const { id } = req.params;
-  const { status, message } = await saleService.getOne(id);
+  const { status, message } = await saleService.getOne(id, req.user.id);
 
   return res.status(status).json(message);
 };

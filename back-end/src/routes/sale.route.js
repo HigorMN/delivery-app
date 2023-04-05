@@ -10,11 +10,13 @@ saleRouter.post('/sale', auth, rescue(createSale));
 
 saleRouter.get(
   '/sales',
+  auth,
   rescue(getAll),
 );
 
 saleRouter.get(
   '/sales/:id',
+  auth,
   rescue(getOne),
 );
 

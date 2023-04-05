@@ -1,11 +1,11 @@
-const { Sale, User, SaleProduct, Product } = require('../database/models');
-const { response, responseError } = require('../utils/response');
+const { Sale, User, SaleProduct, Product, Sequelize } = require('../database/models');
+const { response } = require('../utils/response');
 
-const getAll = async (userEmail) => {
-  const { id } = await User.findOne({ where: { email: userEmail } });
+const { Op } = Sequelize;
+const getAll = async (userId) => {
   const sales = await Sale.findAll(
     { 
-      where: { sellerId: id },
+      where: { [Op.or]: [{ userId }, { sellerId: userId }] },
       include: [
         {
           model: Product,
@@ -17,13 +17,17 @@ const getAll = async (userEmail) => {
   return response(200, sales);
 };
 
-const getOne = async (id) => {
+const getOne = async (id, userId) => {
   const sale = await Sale.findOne({
-    where: { id },
+    where: { id, [Op.or]: [{ userId }, { sellerId: userId }] },
     include: [
       {
         model: Product,
         as: 'products',
+      },
+      {
+        model: User,
+        as: 'seller',
       },
     ],
   });
