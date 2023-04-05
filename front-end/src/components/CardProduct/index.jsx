@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import productContext from '../../hooks/productContext';
-import currencyFormart from '../../utils/currencyFormart';
+import FormatDecimal from '../../utils/currencyFormart';
 
 export default function CardProduct(props) {
   const { id, price, image, name } = props;
@@ -29,7 +29,7 @@ export default function CardProduct(props) {
     <div>
       <div>
         <p data-testid={ `customer_products__element-card-price-${id}` }>
-          {currencyFormart(Number(price))}
+          {FormatDecimal(Number(price))}
         </p>
         <img
           src={ image }

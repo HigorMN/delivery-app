@@ -4,7 +4,7 @@ import CardProduct from '../../components/CardProduct';
 import Header from '../../components/Header';
 import api from '../../utils/api';
 import productContext from '../../hooks/productContext';
-import currencyFormart from '../../utils/currencyFormart';
+import FormatDecimal from '../../utils/currencyFormart';
 
 function Costumer() {
   const [dataProduct, setDataProduct] = useState([]);
@@ -41,7 +41,7 @@ function Costumer() {
         >
           Ver Carrinho: R$
           <span data-testid="customer_products__checkout-bottom-value">
-            { currencyFormart(
+            { FormatDecimal(
               product.reduce((acc, cur) => acc + cur.subTotal, 0),
             )}
           </span>

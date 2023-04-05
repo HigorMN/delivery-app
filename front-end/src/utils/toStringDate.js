@@ -1,13 +1,6 @@
-const toStringDate = (dateString) => {
-  const date = new Date(dateString);
-  const day = (date.getDate()).toLocaleString('pt-BR', {
-    maximumIntegerDigits: 2,
-    minimumIntegerDigits: 2,
-  });
-  const month = date.getUTCMonth() + 1;
-  const year = date.getFullYear().toString().slice(+'-2');
-  const formatedDate = `${day}/${month}/${year}`;
-  return formatedDate;
+const toStringDate = (data) => {
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'UTC' };
+  return new Date(data).toLocaleDateString('pt-BR', options);
 };
 
 export default toStringDate;

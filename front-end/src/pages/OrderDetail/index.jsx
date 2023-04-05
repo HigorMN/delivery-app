@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header';
-import api, { setToken } from '../../utils/api';
+import api from '../../utils/api';
 import toStringDate from '../../utils/toStringDate';
 import OrderTable from '../../components/OrderTable';
+import { orderFormat } from '../../utils/currencyFormart';
+import auth from '../../utils/authentication';
 
 const ROUTE_SELLER = 'seller_order_details';
 const ORDER_ELEMENT = 'element-order-details';
@@ -12,22 +14,23 @@ function OrderDetails({ match }) {
   const { params: { id } } = match;
   const [saleData, setSaleData] = useState();
 
+  const getSaleData = useCallback(async () => {
+    auth();
+    api.get(`/sales/${id}`)
+      .then(({ data }) => {
+        const saleDate = toStringDate(data.saleDate);
+        setSaleData({ ...data, saleDate });
+      });
+  }, [id]);
+
   useEffect(() => {
-    const getSaleData = async () => {
-      api.get(`/sales/${id}`)
-        .then(({ data }) => {
-          const saleDate = toStringDate(data.saleDate);
-          setSaleData({ ...data, saleDate });
-          // setCurrentStatus(saleData.status);
-        });
-    };
     getSaleData();
-  }, [id, saleData]);
+  }, [getSaleData]);
 
   const handleChangeStatus = ({ target: { value } }) => {
-    const { token } = localStorage.getItem('user');
-    setToken(token);
+    auth();
     api.put(`/sales/${id}`, { status: value })
+      .then(() => getSaleData())
       .catch((err) => console.log(err));
   };
 
@@ -45,11 +48,7 @@ function OrderDetails({ match }) {
             >
               PEDIDO
               {' '}
-              { (saleData.id).toLocaleString('pt-BR', {
-                minimumIntegerDigits: 4,
-                maximumIntegerDigits: 4,
-                useGrouping: false,
-              }) }
+              { orderFormat(saleData.id || 0) }
             </p>
 
             <p
@@ -63,7 +62,7 @@ function OrderDetails({ match }) {
                 `${ROUTE_SELLER}__${ORDER_ELEMENT}-label-delivery-status`
               }
             >
-              {saleData.status || ''}
+              {saleData?.status}
 
             </span>
 
@@ -89,7 +88,7 @@ function OrderDetails({ match }) {
             </div>
           </header>
 
-          <OrderTable saleData={ saleData } />
+          <OrderTable saleData={ saleData } route="seller_order_details" />
 
           <span
             data-testid={ `${ROUTE_SELLER}__element-order-total-price` }
