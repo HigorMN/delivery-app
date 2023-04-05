@@ -1,10 +1,8 @@
-import api from './api';
+import { setToken } from './api';
 
-const getAuth = () => {
-  api.get('/authentication')
-    .then(({ data: { status } }) => {
-      if (status === +'401') return setUserAuthenticated(false);
-    });
+const auth = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  setToken(user.token);
 };
 
-export default getAuth;
+export default auth;
