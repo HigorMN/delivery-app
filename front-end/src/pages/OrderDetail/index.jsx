@@ -30,8 +30,7 @@ function OrderDetails({ match }) {
   const handleChangeStatus = ({ target: { value } }) => {
     auth();
     api.put(`/sales/${id}`, { status: value })
-      .then(() => getSaleData())
-      .catch((err) => console.log(err));
+      .then(() => getSaleData());
   };
 
   return (

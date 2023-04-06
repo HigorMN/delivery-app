@@ -7,6 +7,8 @@ import toStringDate from '../../utils/toStringDate';
 import { currencyFormat, orderFormat } from '../../utils/currencyFormart';
 import auth from '../../utils/authentication';
 
+const ROUTE = 'customer_order_details';
+
 export default function CustomerOrderDetails({ match }) {
   const { params: { id } } = match;
   const [saleData, setSaleData] = useState({});
@@ -27,8 +29,7 @@ export default function CustomerOrderDetails({ match }) {
   const handleChangeStatus = ({ target: { value } }) => {
     auth();
     api.put(`/sales/${id}`, { status: value })
-      .then(() => getSaleData())
-      .catch((err) => console.log(err));
+      .then(() => getSaleData());
   };
 
   return (
@@ -36,13 +37,9 @@ export default function CustomerOrderDetails({ match }) {
       <Header />
       <div>
         <p
-          data-testid={
-            `customer_order_details__element-order-details-label-order-${id}`
-          }
+          data-testid="customer_order_details__element-order-details-label-order-id"
         >
-          PEDIDO
-          {' '}
-          { orderFormat(saleData.id || 0)}
+          {`PEDIDO ${orderFormat(saleData.id || 0)}`}
         </p>
         <p
           data-testid="customer_order_details__element-order-details-label-seller-name"
@@ -55,10 +52,9 @@ export default function CustomerOrderDetails({ match }) {
           { saleData.saleDate }
         </p>
         <span
-          data-testid="
-          customer_order_details__element-order-details-label-delivery-status"
+          data-testid={ `${ROUTE}__element-order-details-label-delivery-status` }
         >
-          {saleData.status || ''}
+          {saleData?.status}
         </span>
 
         <div>
@@ -80,8 +76,7 @@ export default function CustomerOrderDetails({ match }) {
           data-testid="customer_order_details__element-order-total-price"
           style={ { position: 'fixed', bottom: 0 } }
         >
-          { 'Total: '}
-          {(currencyFormat(Number(saleData.totalPrice)))}
+          { `Total: ${currencyFormat(Number(saleData.totalPrice))}` }
         </span>
       </div>
     </>
