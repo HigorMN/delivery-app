@@ -21,11 +21,13 @@ export default function CustomerOrders() {
   return (
     <>
       <Header />
-      {
-        customerSales.map((sale) => (
-          <CustomerCard key={ sale.id } sale={ sale } />
-        ))
-      }
+      <div className="orders page">
+        {
+          customerSales.map((sale) => (
+            <CustomerCard key={ sale.id } sale={ sale } />
+          ))
+        }
+      </div>
     </>
   );
 }

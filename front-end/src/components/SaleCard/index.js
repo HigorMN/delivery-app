@@ -9,33 +9,38 @@ const ORDER_ELEMENT = 'element-order';
 function SaleCard({ sale }) {
   const formatedDate = toStringDate(sale.saleDate);
   return (
-    <div style={ { border: '1px solid black' } }>
+    <div className="order-card">
       <Link
         to={ `/seller/orders/${sale.id}` }
       >
-        <p
-          data-testid={ `${ROUTE_SELLER}__${ORDER_ELEMENT}-id-${sale.id}` }
-        >
-          Pedido:
-          {' '}
-          { (sale.id).toLocaleString('pt-BR', {
-            minimumIntegerDigits: 4,
-            maximumIntegerDigits: 4,
-            useGrouping: false,
-          }) }
-        </p>
-        <div>
+        <div className="flex justified-between">
+          <p
+            className="order-number"
+            data-testid={ `${ROUTE_SELLER}__${ORDER_ELEMENT}-id-${sale.id}` }
+          >
+            Pedido:
+            {' '}
+            { (sale.id).toLocaleString('pt-BR', {
+              minimumIntegerDigits: 4,
+              maximumIntegerDigits: 4,
+              useGrouping: false,
+            }) }
+          </p>
+
           <h3
             data-testid={ `${ROUTE_SELLER}__element-delivery-status-${sale.id}` }
           >
             { sale.status }
           </h3>
+        </div>
+        <div className="flex justified-between">
           <p
             data-testid={ `${ROUTE_SELLER}__${ORDER_ELEMENT}-date-${sale.id}` }
           >
             { formatedDate }
           </p>
           <p
+            className="on-card-order-value"
             data-testid={ `${ROUTE_SELLER}__element-card-price-${sale.id}` }
           >
             { Number(sale.totalPrice).toLocaleString(
@@ -49,6 +54,7 @@ function SaleCard({ sale }) {
             ) }
           </p>
         </div>
+
         <p
           data-testid={ `seller_orders__element-card-address-${sale.id}` }
         >

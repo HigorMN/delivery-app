@@ -37,10 +37,10 @@ function OrderDetails({ match }) {
     <div>
       <Header />
       { saleData && (
-        <div>
-          Detalhe do Pedido
+        <div className="order-details page">
+          <h2>Detalhe do Pedido</h2>
 
-          <header>
+          <header className="order-panel">
 
             <p
               data-testid={ `${ROUTE_SELLER}__${ORDER_ELEMENT}-label-order-id` }
@@ -90,6 +90,7 @@ function OrderDetails({ match }) {
           <OrderTable saleData={ saleData } route="seller_order_details" />
 
           <span
+            className="total-box-fixed"t
             data-testid={ `${ROUTE_SELLER}__element-order-total-price` }
             style={ { position: 'fixed', bottom: 0 } }
           >

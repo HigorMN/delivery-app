@@ -26,7 +26,7 @@ export default function CardProduct(props) {
   };
 
   return (
-    <div>
+    <div className="product-card">
       <div>
         <p data-testid={ `customer_products__element-card-price-${id}` }>
           {FormatDecimal(Number(price))}
@@ -40,7 +40,7 @@ export default function CardProduct(props) {
       <div>
         <p data-testid={ `customer_products__element-card-title-${id}` }>{name}</p>
       </div>
-      <div>
+      <div className="quantity-box">
         <button
           type="button"
           data-testid={ `customer_products__button-card-rm-item-${id}` }

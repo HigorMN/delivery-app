@@ -23,7 +23,7 @@ function Costumer() {
   return (
     <>
       <Header />
-      <main>
+      <main className="products page">
         { dataProduct.map((e, index) => (
           <CardProduct
             key={ index }
@@ -34,6 +34,7 @@ function Costumer() {
           />
         ))}
         <button
+          className="to-cart-button"
           data-testid="customer_products__button-cart"
           type="button"
           onClick={ () => push('/customer/checkout') }

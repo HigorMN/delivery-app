@@ -32,7 +32,7 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className="register">
       <h1>Cadastro</h1>
       <form>
         <label htmlFor="name">

@@ -5,10 +5,12 @@ import UserList from '../../components/UserList';
 
 export default function AdminManage() {
   return (
-    <>
+    <div>
       <Header />
-      <RegisterNewUser />
-      <UserList />
-    </>
+      <div className="admin-manage page">
+        <RegisterNewUser />
+        <UserList />
+      </div>
+    </div>
   );
 }

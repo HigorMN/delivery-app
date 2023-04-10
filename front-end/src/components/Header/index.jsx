@@ -8,7 +8,7 @@ export default function Header() {
   const { pathname } = useLocation();
 
   return (
-    <header>
+    <header className="header">
       { pathname.includes('customer') && <NavCustomer /> }
       { pathname.includes('seller') && <NavSeller /> }
       { pathname.includes('admin') && <NavAdmin />}

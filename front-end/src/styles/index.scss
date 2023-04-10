@@ -1,0 +1,496 @@
+$primary: #ffeded;
+$primary-2: #ffdede;
+$secondary: rgb(205, 86, 86);
+$secondary-2: rgba(205, 86, 86, 0.4);
+$copy: rgb(148, 126, 126);
+
+/////////////////// GENERICS //////////
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  font-family: 'Nunito', sans-serif;
+
+  .error-message {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      background-color: white;
+      border-radius: .5rem;
+      padding: 2rem 3rem;
+      color: $secondary;
+      font-weight: 600;
+      font-size: 1rem;
+
+    }
+
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  input {
+    box-sizing: content-box;
+    padding: .6rem;
+    border-radius: .15rem;
+    outline: none;
+    border: none;
+    background-color: $primary-2;
+  }
+
+  select {
+    outline: none;
+    border: 2px solid $secondary;
+    border-radius: .2rem;
+    padding: .6rem;
+  }
+
+  button {
+    border: none;
+    padding: .6rem;
+    border-radius: .2rem;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: .3;
+      pointer-events: none;
+    }
+  }
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.justified-between {
+  justify-content: space-between;
+}
+
+body {
+  background-color: $primary;
+}
+
+.page {
+  border-radius: .8rem;
+  width: 80%;
+  margin: auto;
+  max-width: 1388px;
+  padding: 2rem;
+}
+
+.total-box-fixed {
+  background-color: $secondary !important;
+  color: white !important;
+  position: fixed !important;
+  bottom: 2rem !important;
+  color: white !important;
+  right: 3rem !important;
+  font-size: 1.2rem;
+}
+
+
+
+////////////////////// LOGIN E REGISTRO ////////////
+.login,
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -30%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 1rem;
+    text-align: center;
+    color: $secondary;
+  }
+
+  img {
+    max-width: 14rem;
+    min-width: 14rem;
+    max-height: 14rem;
+    min-height: 14rem;
+    border-radius: 50%;
+    box-shadow: 1px 1px 4px $secondary;
+  }
+
+  form {
+    box-shadow: 1px 1px 4px $secondary-2;
+
+    border-radius: .8rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    min-width: 20rem;
+
+    label {
+      font-size: 14px;
+      color: $copy;
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      margin: .3rem 0 1.5rem 0;
+    }
+
+
+    button {
+      margin: .5rem 0;
+      background: none;
+      border: 2px solid $secondary;
+      color: $secondary;
+      transition: .15s;
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        color: $primary;
+        background-color: $secondary;
+      }
+    }
+  }
+}
+
+
+///////////////////////// HEADER ////////////////
+.header {
+  padding: 1.5rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $copy;
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    a {
+      text-decoration: none;
+      color: $secondary;
+      font-weight: 600;
+      transition: .1s;
+
+      &:hover {
+        color: $copy;
+      }
+    }
+  }
+}
+
+/////////////////// products ///////////////
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .product-card {
+    border-radius: .8rem;
+    background-color: white;
+    padding: 1rem;
+
+    img {
+      max-width: 10rem;
+      max-height: 10rem;
+      display: flex;
+      margin: auto;
+    }
+
+    p {
+      font-size: 14px;
+      max-width: 10rem;
+      font-weight: 600;
+      color: $copy;
+      height: 2.5rem;
+    }
+
+    .quantity-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      input {
+        max-width: 5rem;
+        text-align: center;
+        margin: unset;
+
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+
+      button {
+        background-color: $secondary;
+        color: white;
+        min-width: 2rem;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .to-cart-button {
+    position: fixed;
+    cursor: pointer;
+    height: 8rem;
+    border-radius: .8rem;
+    border-bottom-right-radius: 6rem;
+    border-top-left-radius: 6rem;
+    background-color: $secondary;
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 2rem 3rem;
+    bottom: 2rem;
+    right: 3rem;
+    border: 1px solid red;
+    transition: .2s;
+
+    &:hover {
+      transform: scale(1.15)
+    }
+  }
+}
+
+///////////////////////////// checkout ///////////
+.checkout {
+  box-shadow: 1px 1px 3px $secondary-2;
+
+  h2 {
+    color: $secondary;
+    margin: 1rem;
+  }
+
+  .total-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 1rem 0;
+    gap: 1rem;
+    background-color: white;
+    border-radius: .2rem;
+    width: 18%;
+    float: right;
+    padding: .6rem 2rem;
+  }
+
+  form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    input {
+      width: 4rem;
+    }
+
+    .address-input {
+      min-width: 14rem;
+    }
+
+    button {
+      background-color: $secondary;
+      color: white;
+      font-weight: 600;
+      width: 18%;
+    }
+  }
+
+  label {
+    font-weight: 600;
+    color: $copy;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+
+/////////////////////////// tabelas
+table {
+  text-align: center;
+  width: 100%;
+
+  th {
+    background-color: $secondary;
+    color: white;
+    border-radius: .2rem;
+  }
+
+  td {
+    background-color: white;
+    padding: .3rem 0;
+    border-radius: .2rem;
+  }
+
+  button {
+    width: 80%;
+    color: $secondary;
+    border: 1px solid $secondary;
+    padding: .4rem;
+    transition: .1s;
+
+    &:hover {
+      background-color: $secondary;
+      color: white;
+    }
+  }
+}
+
+/////////////////////////////// ORDERS //////////////
+.orders {
+  box-shadow: 1px 1px 3px $secondary-2;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  h3 {
+    background-color: rgb(250, 242, 102);
+    padding: 1rem 1.5rem;
+    border-radius: .5rem;
+    border: 2px solid $primary-2;
+    color: $copy;
+    font-weight: 700;
+  }
+}
+
+
+/////////////////////////// ORDER DETAIL ////////////////
+.order-details {
+  box-shadow: 1px 1px 3px $secondary-2;
+
+  h2 {
+    color: $secondary
+  }
+
+  p {
+    color: $copy;
+    font-weight: 500;
+  }
+
+  span {
+    background-color: rgb(250, 242, 102);
+    padding: 1rem 1.5rem;
+    border-radius: .5rem;
+    border: 2px solid $primary-2;
+    color: $copy;
+    font-weight: 700;
+  }
+
+  .order-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    button {
+      border: 1px solid $secondary;
+      padding: 1rem 1.5rem;
+      color: $secondary;
+      transition: .1s;
+      margin-left: 1rem;
+
+      &:hover {
+        background-color: $secondary;
+        color: white;
+      }
+    }
+  }
+
+
+}
+
+/////////////////////////////// ORDER CARD ///////////////
+.order-card {
+
+  transition: .2s;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  color: $copy;
+  box-shadow: 0px 0px 3px $secondary-2;
+  border-radius: .3rem;
+  min-width: 26rem;
+  background-color: white;
+  padding: 1rem;
+
+  .on-card-order-value {
+    font-size: 1.2rem;
+    color: $copy;
+    font-weight: 700;
+    margin: .5rem;
+    padding: 0 1.5rem;
+  }
+
+  .order-number {
+    font-size: 1.2rem;
+    color: black;
+    border-radius: .2rem;
+  }
+
+  p {
+    color: $copy;
+  }
+}
+
+////////////////////////////////// ADMIN MANAGER ///////////
+.admin-manage {
+  box-shadow: 1px 1px 3px $secondary-2;
+
+  border: 1px 1px 4px $secondary-2;
+
+  h3 {
+    color: $secondary;
+    font-weight: 700;
+  }
+
+  form {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+
+    button {
+      border: 2px solid $secondary;
+      font-weight: 600;
+      transition: .2s;
+      color: $secondary;
+      height: fit-content;
+      transform: translateY(.5rem);
+
+      &:hover {
+        background-color: $secondary;
+        color: white;
+      }
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: $copy;
+    }
+  }
+}

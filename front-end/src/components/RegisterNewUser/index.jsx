@@ -27,11 +27,6 @@ export default function RegisterNewUser() {
   return (
     <>
       <h3>Cadastrar Novo Usuario</h3>
-      {messageErro && (
-        <p data-testid="admin_manage__element-invalid-register">
-          {messageErro}
-        </p>
-      )}
       <form>
         <label htmlFor="name">
           <p>Nome</p>
@@ -90,7 +85,22 @@ export default function RegisterNewUser() {
         >
           CADASTRAR
         </button>
+
       </form>
+      {messageErro && (
+        <button
+          type="button"
+          className="error-message"
+          onClick={ () => setMessageErro() }
+        >
+
+          <p
+            data-testid="admin_manage__element-invalid-register"
+          >
+            {messageErro}
+          </p>
+        </button>
+      )}
     </>
   );
 }

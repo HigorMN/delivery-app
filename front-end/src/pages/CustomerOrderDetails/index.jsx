@@ -35,49 +35,52 @@ export default function CustomerOrderDetails({ match }) {
   return (
     <>
       <Header />
-      <div>
-        <p
-          data-testid="customer_order_details__element-order-details-label-order-id"
-        >
-          {`PEDIDO ${orderFormat(saleData.id || 0)}`}
-        </p>
-        <p
-          data-testid="customer_order_details__element-order-details-label-seller-name"
-        >
-          { saleData.seller?.name }
-        </p>
-        <p
-          data-testid="customer_order_details__element-order-details-label-order-date"
-        >
-          { saleData.saleDate }
-        </p>
-        <span
-          data-testid={ `${ROUTE}__element-order-details-label-delivery-status` }
-        >
-          {saleData?.status}
-        </span>
-
-        <div>
-          <button
-            onClick={ handleChangeStatus }
-            value="Entregue"
-            disabled={ saleData.status !== 'Em Trânsito' }
-            data-testid="customer_order_details__button-delivery-check"
-            type="button"
+      <div className="order-details page">
+        <h2>Detalhe do Pedido</h2>
+        <div className="order-panel">
+          <div>
+            <p
+              data-testid="customer_order_details__element-order-details-label-order-id"
+            >
+              {`PEDIDO ${orderFormat(saleData.id || 0)}`}
+            </p>
+            <p
+              data-testid="customer_order_details__element-order-details-label-seller-name"
+            >
+              { saleData.seller?.name }
+            </p>
+          </div>
+          <p
+            data-testid="customer_order_details__element-order-details-label-order-date"
           >
-            MARCAR COMO ENTREGUE
-          </button>
+            { saleData.saleDate }
+          </p>
+          <span
+            data-testid={ `${ROUTE}__element-order-details-label-delivery-status` }
+          >
+            {saleData?.status}
+          </span>
+          <div>
+            <button
+              onClick={ handleChangeStatus }
+              value="Entregue"
+              disabled={ saleData.status !== 'Em Trânsito' }
+              data-testid="customer_order_details__button-delivery-check"
+              type="button"
+            >
+              MARCAR COMO ENTREGUE
+            </button>
+          </div>
         </div>
-
-      </div>
-      <OrderTable saleData={ saleData } route="customer_order_details" />
-      <div>
-        <span
-          data-testid="customer_order_details__element-order-total-price"
-          style={ { position: 'fixed', bottom: 0 } }
-        >
-          { `Total: ${currencyFormat(Number(saleData.totalPrice))}` }
-        </span>
+        <OrderTable saleData={ saleData } route="customer_order_details" />
+        <div>
+          <span
+            className="total-box-fixed"
+            data-testid="customer_order_details__element-order-total-price"
+          >
+            { `Total: ${currencyFormat(Number(saleData.totalPrice))}` }
+          </span>
+        </div>
       </div>
     </>
   );

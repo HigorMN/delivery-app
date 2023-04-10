@@ -38,7 +38,7 @@ export default function Login() {
   return (
     <div>
       <Redirect to="/login" />
-      <div>
+      <div className="login page">
         <img src="" alt="" />
         <h1>nome app</h1>
         <form>

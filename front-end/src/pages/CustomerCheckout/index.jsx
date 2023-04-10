@@ -41,91 +41,98 @@ export default function CustomerCheckout() {
   return (
     <>
       <Header />
-      <h2>Finalizar pedido</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantitade</th>
-            <th>Valor Unitário</th>
-            <th>Sub total</th>
-            <th>Remover item</th>
-          </tr>
-        </thead>
-        <tbody>
-          {product.map((p, index) => (
-            <tr key={ p.id }>
-              <td data-testid={ `${dt}-item-number-${index}` }>{index + 1}</td>
-              <td data-testid={ `${dt}-name-${index}` }>{p.name}</td>
-              <td data-testid={ `${dt}-quantity-${index}` }>{p.quantity}</td>
-              <td data-testid={ `${dt}-unit-price-${index}` }>
-                {FormatDecimal(Number(p.price))}
-              </td>
-              <td data-testid={ `${dt}-sub-total-${index}` }>
-                {FormatDecimal(p.subTotal)}
-              </td>
-              <td data-testid={ `${dt}-remove-${index}` }>
-                <button
-                  onClick={ () => removeItem(index) }
-                  type="button"
-                >
-                  Remover
-                </button>
-              </td>
+      <div className="checkout page">
+        <h2>Finalizar pedido</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Descrição</th>
+              <th>Quantitade</th>
+              <th>Valor Unitário</th>
+              <th>Sub total</th>
+              <th>Remover item</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <h3>
-        Total:
-      </h3>
-      <p data-testid="customer_checkout__element-order-total-price">
-        {FormatDecimal(totalPrice)}
-      </p>
-      <form>
-        <h2>Detalhes e Endereço para Entrega</h2>
-        <label htmlFor="seller">
-          P. Vendedora Responsável:
-          <select
-            data-testid="customer_checkout__select-seller"
-            name="seller"
-            value={ sellerId }
-            onChange={ ({ target: { value } }) => setSellerId(value) }
-          >
-            {sellerData.map((e, index) => (
-              <option key={ index } value={ e.id }>{e.name}</option>
+          </thead>
+          <tbody>
+            {product.map((p, index) => (
+              <tr key={ p.id }>
+                <td data-testid={ `${dt}-item-number-${index}` }>{index + 1}</td>
+                <td data-testid={ `${dt}-name-${index}` }>{p.name}</td>
+                <td data-testid={ `${dt}-quantity-${index}` }>{p.quantity}</td>
+                <td data-testid={ `${dt}-unit-price-${index}` }>
+                  {FormatDecimal(Number(p.price))}
+                </td>
+                <td data-testid={ `${dt}-sub-total-${index}` }>
+                  {FormatDecimal(p.subTotal)}
+                </td>
+                <td data-testid={ `${dt}-remove-${index}` }>
+                  <button
+                    onClick={ () => removeItem(index) }
+                    type="button"
+                  >
+                    Remover
+                  </button>
+                </td>
+              </tr>
             ))}
-          </select>
-        </label>
-        <label htmlFor="address">
-          Endereço
-          <input
-            data-testid="customer_checkout__input-address"
-            name="address"
-            type="text"
-            value={ deliveryAddress }
-            onChange={ (e) => setDeliveryAddress(e.target.value) }
-          />
-        </label>
-        <label htmlFor="number">
-          Número
-          <input
-            data-testid="customer_checkout__input-address-number"
-            name="number"
-            type="text"
-            value={ deliveryNumber }
-            onChange={ (e) => setDeliveryNumber(e.target.value) }
-          />
-        </label>
-        <button
-          data-testid="customer_checkout__button-submit-order"
-          type="button"
-          onClick={ handleClick }
-        >
-          FINALIZAR PEDIDO
-        </button>
-      </form>
+          </tbody>
+        </table>
+        <div className="flex justified-between">
+          <h2>Detalhes e Endereço para Entrega</h2>
+          <div className="total-box">
+            <h3>
+              Total:
+            </h3>
+            <p data-testid="customer_checkout__element-order-total-price">
+              {FormatDecimal(totalPrice)}
+            </p>
+          </div>
+        </div>
+        <form>
+          <label htmlFor="seller">
+            P. Vendedora Responsável:
+            <select
+              data-testid="customer_checkout__select-seller"
+              name="seller"
+              value={ sellerId }
+              onChange={ ({ target: { value } }) => setSellerId(value) }
+            >
+              {sellerData.map((e, index) => (
+                <option key={ index } value={ e.id }>{e.name}</option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="address">
+            Endereço
+            <input
+              className="address-input"
+              data-testid="customer_checkout__input-address"
+              name="address"
+              type="text"
+              value={ deliveryAddress }
+              onChange={ (e) => setDeliveryAddress(e.target.value) }
+            />
+          </label>
+          <label htmlFor="number">
+            Número
+            <input
+              data-testid="customer_checkout__input-address-number"
+              name="number"
+              type="text"
+              value={ deliveryNumber }
+              onChange={ (e) => setDeliveryNumber(e.target.value) }
+            />
+          </label>
+          <button
+            data-testid="customer_checkout__button-submit-order"
+            type="button"
+            onClick={ handleClick }
+          >
+            FINALIZAR PEDIDO
+          </button>
+        </form>
+      </div>
     </>
   );
 }

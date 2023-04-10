@@ -21,11 +21,13 @@ function SellerOrders() {
   return (
     <div>
       <Header />
-      {
-        sellerSales.map((sale) => (
-          <SaleCard key={ sale.id } sale={ sale } />
-        ))
-      }
+      <div className="orders page">
+        {
+          sellerSales.map((sale) => (
+            <SaleCard key={ sale.id } sale={ sale } />
+          ))
+        }
+      </div>
     </div>
   );
 }
