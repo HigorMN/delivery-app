@@ -32,7 +32,7 @@ export default function CardProduct(props) {
           {FormatDecimal(Number(price))}
         </p>
         <img
-          src={ image }
+          src={ image?.replace('jpg', 'png') }
           alt={ name }
           data-testid={ `customer_products__img-card-bg-image-${id}` }
         />
