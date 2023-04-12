@@ -22,7 +22,7 @@
   background-color: white;
   border-radius: 0.5rem;
   padding: 2rem 3rem;
-  color: rgb(205, 86, 86);
+  color: rgb(145, 160, 226);
   font-weight: 600;
   font-size: 1rem;
 }
@@ -35,11 +35,12 @@
   border-radius: 0.15rem;
   outline: none;
   border: none;
-  background-color: #ffdede;
+  color: rgb(231, 232, 248);
+  background-color: rgb(48, 51, 73);
 }
 * select {
   outline: none;
-  border: 2px solid rgb(205, 86, 86);
+  border: 2px solid rgb(145, 160, 226);
   border-radius: 0.2rem;
   padding: 0.6rem;
 }
@@ -64,23 +65,23 @@
 }
 
 body {
-  background-color: #ffeded;
+  background-color: #252738;
 }
 
 .page {
   border-radius: 0.8rem;
   width: 80%;
-  margin: auto;
+  margin: 3rem auto;
   max-width: 1388px;
   padding: 2rem;
 }
 
 .total-box-fixed {
-  background-color: rgb(205, 86, 86) !important;
+  background-color: rgb(145, 160, 226) !important;
   color: white !important;
   position: fixed !important;
-  bottom: 2rem !important;
   color: white !important;
+  bottom: 3rem !important;
   right: 3rem !important;
   font-size: 1.2rem;
 }
@@ -104,7 +105,7 @@ body {
   font-weight: 500;
   margin: 1rem;
   text-align: center;
-  color: rgb(205, 86, 86);
+  color: rgb(145, 160, 226);
 }
 .login img,
 .register img {
@@ -113,11 +114,11 @@ body {
   max-height: 14rem;
   min-height: 14rem;
   border-radius: 50%;
-  box-shadow: 1px 1px 4px rgb(205, 86, 86);
+  box-shadow: 1px 1px 4px rgb(145, 160, 226);
 }
 .login form,
 .register form {
-  box-shadow: 1px 1px 4px rgba(205, 86, 86, 0.4);
+  box-shadow: 1px 1px 4px rgba(165, 177, 230, 0.486);
   border-radius: 0.8rem;
   display: flex;
   flex-direction: column;
@@ -127,7 +128,7 @@ body {
 .login form label,
 .register form label {
   font-size: 14px;
-  color: rgb(148, 126, 126);
+  color: rgb(231, 232, 248);
   display: flex;
   flex-direction: column;
 }
@@ -139,24 +140,25 @@ body {
 .register form button {
   margin: 0.5rem 0;
   background: none;
-  border: 2px solid rgb(205, 86, 86);
-  color: rgb(205, 86, 86);
+  border: 2px solid rgb(145, 160, 226);
+  color: rgb(145, 160, 226);
   transition: 0.15s;
   font-weight: 600;
   cursor: pointer;
 }
 .login form button:hover,
 .register form button:hover {
-  color: #ffeded;
-  background-color: rgb(205, 86, 86);
+  color: #252738;
+  background-color: rgb(145, 160, 226);
 }
 
 .header {
+  background-color: rgb(48, 51, 73);
   padding: 1.5rem 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: rgb(148, 126, 126);
+  color: rgb(231, 232, 248);
 }
 .header nav {
   display: flex;
@@ -165,25 +167,35 @@ body {
 }
 .header nav a {
   text-decoration: none;
-  color: rgb(205, 86, 86);
+  color: rgb(145, 160, 226);
   font-weight: 600;
   transition: 0.1s;
 }
 .header nav a:hover {
-  color: rgb(148, 126, 126);
+  color: rgb(231, 232, 248);
 }
 
 .products {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 .products .product-card {
+  transition: 0.3s;
   border-radius: 0.8rem;
-  background-color: white;
+  background-color: rgb(48, 51, 73);
   padding: 1rem;
 }
+.products .product-card:hover {
+  transform: scale(1.1);
+}
+.products .product-card .image-box {
+  width: 100%;
+  background-color: white;
+  border-radius: 50%;
+}
 .products .product-card img {
+  border-radius: 5rem;
   max-width: 10rem;
   max-height: 10rem;
   display: flex;
@@ -193,7 +205,7 @@ body {
   font-size: 14px;
   max-width: 10rem;
   font-weight: 600;
-  color: rgb(148, 126, 126);
+  color: rgb(231, 232, 248);
   height: 2.5rem;
 }
 .products .product-card .quantity-box {
@@ -205,13 +217,14 @@ body {
   max-width: 5rem;
   text-align: center;
   margin: unset;
+  background-color: #252738;
 }
 .products .product-card .quantity-box input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 .products .product-card .quantity-box button {
-  background-color: rgb(205, 86, 86);
+  background-color: rgb(145, 160, 226);
   color: white;
   min-width: 2rem;
   font-weight: 700;
@@ -223,14 +236,13 @@ body {
   border-radius: 0.8rem;
   border-bottom-right-radius: 6rem;
   border-top-left-radius: 6rem;
-  background-color: rgb(205, 86, 86);
+  background-color: rgb(145, 160, 226);
   color: white;
   font-weight: 600;
   font-size: 1.2rem;
   padding: 2rem 3rem;
   bottom: 2rem;
   right: 3rem;
-  border: 1px solid red;
   transition: 0.2s;
 }
 .products .to-cart-button:hover {
@@ -238,10 +250,10 @@ body {
 }
 
 .checkout {
-  box-shadow: 1px 1px 3px rgba(205, 86, 86, 0.4);
+  box-shadow: 1px 1px 3px rgba(165, 177, 230, 0.486);
 }
 .checkout h2 {
-  color: rgb(205, 86, 86);
+  color: rgb(145, 160, 226);
   margin: 1rem;
 }
 .checkout .total-box {
@@ -251,6 +263,8 @@ body {
   margin: 1rem 0;
   gap: 1rem;
   background-color: white;
+  font-weight: 600;
+  color: rgb(145, 160, 226);
   border-radius: 0.2rem;
   width: 18%;
   float: right;
@@ -258,6 +272,8 @@ body {
 }
 .checkout form {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   align-items: center;
   justify-content: space-between;
 }
@@ -268,14 +284,14 @@ body {
   min-width: 14rem;
 }
 .checkout form button {
-  background-color: rgb(205, 86, 86);
+  background-color: rgb(145, 160, 226);
   color: white;
   font-weight: 600;
   width: 18%;
 }
 .checkout label {
   font-weight: 600;
-  color: rgb(148, 126, 126);
+  color: rgb(231, 232, 248);
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -286,58 +302,61 @@ table {
   width: 100%;
 }
 table th {
-  background-color: rgb(205, 86, 86);
+  background-color: rgb(145, 160, 226);
   color: white;
   border-radius: 0.2rem;
 }
 table td {
-  background-color: white;
+  background-color: rgb(48, 51, 73);
+  color: rgb(231, 232, 248);
   padding: 0.3rem 0;
   border-radius: 0.2rem;
 }
 table button {
-  width: 80%;
-  color: rgb(205, 86, 86);
-  border: 1px solid rgb(205, 86, 86);
-  padding: 0.4rem;
+  background-color: transparent;
+  padding: 0.4rem 0.8rem;
+  color: rgb(145, 160, 226);
   transition: 0.1s;
 }
-table button:hover {
-  background-color: rgb(205, 86, 86);
-  color: white;
+table button i {
+  font-size: 1.5rem;
+  transition: 0.1s;
+}
+table button i:hover {
+  color: rgb(187, 77, 77);
 }
 
 .orders {
-  box-shadow: 1px 1px 3px rgba(205, 86, 86, 0.4);
+  box-shadow: 1px 1px 3px rgba(165, 177, 230, 0.486);
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
 }
 .orders h3 {
-  background-color: rgb(250, 242, 102);
+  background-color: rgb(131, 133, 141);
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
   border: 2px solid #ffdede;
-  color: rgb(148, 126, 126);
+  color: rgb(231, 232, 248);
   font-weight: 700;
 }
 
 .order-details {
-  box-shadow: 1px 1px 3px rgba(205, 86, 86, 0.4);
+  box-shadow: 1px 1px 3px rgba(165, 177, 230, 0.486);
 }
 .order-details h2 {
-  color: rgb(205, 86, 86);
+  color: rgb(145, 160, 226);
 }
 .order-details p {
-  color: rgb(148, 126, 126);
+  color: rgb(231, 232, 248);
   font-weight: 500;
 }
 .order-details span {
-  background-color: rgb(250, 242, 102);
+  background-color: rgb(131, 133, 141);
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
   border: 2px solid #ffdede;
-  color: rgb(148, 126, 126);
+  color: rgb(231, 232, 248);
   font-weight: 700;
 }
 .order-details .order-panel {
@@ -347,24 +366,26 @@ table button:hover {
   margin-bottom: 1rem;
 }
 .order-details .order-panel button {
-  border: 1px solid rgb(205, 86, 86);
+  border: 1px solid rgb(145, 160, 226);
+  background-color: rgb(145, 160, 226);
   padding: 1rem 1.5rem;
-  color: rgb(205, 86, 86);
+  color: rgb(231, 232, 248);
   transition: 0.1s;
   margin-left: 1rem;
+  font-weight: 600;
 }
 .order-details .order-panel button:hover {
-  background-color: rgb(205, 86, 86);
-  color: white;
+  background-color: rgb(231, 232, 248);
+  color: rgb(145, 160, 226);
 }
 
 .order-card {
   transition: 0.2s;
-  color: rgb(148, 126, 126);
-  box-shadow: 0px 0px 3px rgba(205, 86, 86, 0.4);
+  color: rgb(231, 232, 248);
+  box-shadow: 0px 0px 3px rgba(165, 177, 230, 0.486);
   border-radius: 0.3rem;
   min-width: 26rem;
-  background-color: white;
+  background-color: rgb(48, 51, 73);
   padding: 1rem;
 }
 .order-card:hover {
@@ -372,26 +393,26 @@ table button:hover {
 }
 .order-card .on-card-order-value {
   font-size: 1.2rem;
-  color: rgb(148, 126, 126);
+  color: rgb(231, 232, 248);
   font-weight: 700;
   margin: 0.5rem;
   padding: 0 1.5rem;
 }
 .order-card .order-number {
   font-size: 1.2rem;
-  color: black;
+  color: rgb(231, 232, 248);
   border-radius: 0.2rem;
 }
 .order-card p {
-  color: rgb(148, 126, 126);
+  color: rgb(231, 232, 248);
 }
 
 .admin-manage {
-  box-shadow: 1px 1px 3px rgba(205, 86, 86, 0.4);
-  border: 1px 1px 4px rgba(205, 86, 86, 0.4);
+  box-shadow: 1px 1px 3px rgba(165, 177, 230, 0.486);
+  border: 1px 1px 4px rgba(165, 177, 230, 0.486);
 }
 .admin-manage h3 {
-  color: rgb(205, 86, 86);
+  color: rgb(145, 160, 226);
   font-weight: 700;
 }
 .admin-manage form {
@@ -401,20 +422,20 @@ table button:hover {
   align-items: center;
 }
 .admin-manage form button {
-  border: 2px solid rgb(205, 86, 86);
+  border: 2px solid rgb(145, 160, 226);
   font-weight: 600;
   transition: 0.2s;
-  color: rgb(205, 86, 86);
+  color: rgb(145, 160, 226);
   height: -moz-fit-content;
   height: fit-content;
   transform: translateY(0.5rem);
 }
 .admin-manage form button:hover {
-  background-color: rgb(205, 86, 86);
+  background-color: rgb(145, 160, 226);
   color: white;
 }
 .admin-manage form label {
   font-size: 14px;
   font-weight: 500;
-  color: rgb(148, 126, 126);
+  color: rgb(231, 232, 248);
 }/*# sourceMappingURL=index.css.map */

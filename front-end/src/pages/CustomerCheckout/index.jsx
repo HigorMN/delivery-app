@@ -71,7 +71,7 @@ export default function CustomerCheckout() {
                     onClick={ () => removeItem(index) }
                     type="button"
                   >
-                    Remover
+                    <i className="fa-solid fa-trash" />
                   </button>
                 </td>
               </tr>
